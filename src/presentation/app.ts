@@ -14,7 +14,7 @@ app.use(cors({
     "origin":"*"
 }));
 
-app.use('/users', UserRoutes)
+app.use('/users', UserRoutes);
 
 ConectionToMongoDB();
 
