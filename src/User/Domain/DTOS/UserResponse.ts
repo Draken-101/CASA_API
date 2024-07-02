@@ -1,4 +1,4 @@
-export interface CreateUser{
+export interface UserResponse{
     message:string;
     state:boolean;
 }
