@@ -1,6 +1,8 @@
 import express from 'express';
-import { userController } from '../Dependencies';
+import { loginController, userCreateController, verifyToken } from '../Dependencies';
 
 export const UserRoutes = express();
 
-UserRoutes.post('/', userController.run.bind(userController));
+UserRoutes.post('/', verifyToken.run.bind(verifyToken), userCreateController.run.bind(userCreateController));
+
+UserRoutes.post('/login', loginController.run.bind(loginController));

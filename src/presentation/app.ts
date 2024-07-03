@@ -1,8 +1,9 @@
 import express from "express";
 import cors from 'cors'
-import signale from "signale"
 import ConectionToMongoDB from '../config/database'
 import { UserRoutes } from "../User/Infraestructure/Routes/User.routes";
+import { custom, customText } from "../config/Services/customSignale";
+import DeviceRouter from "../Devices/Infraestructure/Routes/Device.routes";
 
 const PORT = 3000;
 
@@ -14,12 +15,23 @@ app.use(cors({
     "origin":"*"
 }));
 
-app.use('/users', UserRoutes);
+app.use('/api/v1/users', UserRoutes);
+
+app.use('/api/v1/devices', DeviceRouter);
 
 ConectionToMongoDB();
 
 app.listen(PORT, () => {
     console.clear();
-    // [36m]-Cyan | [35m]-Magenta | [1m]-Blanco | [\xqb]-AgreagaColor | [0m]-noBold | [1m]-Bold
-    signale.success(`🚀 \x1b[1m\x1b[36m|\x1b[0m \x1b[35mServidor corriéndose en el puerto\x1b[0m \x1b[1m\x1b[37m${PORT}\x1b[0m \x1b[1m\x1b[36m|\x1b[0m 🌐`);
+    // [36m]-Cyan | [35m]-Magenta | [37m]-Blanco | [\xqb]-AgreagaColor | [0m]-noBold | [1m]-Bold
+    
+    custom.Success(
+        '🚀' + 
+        customText.bold + customText.colors.cyan + ' | ' + customText.end +
+        customText.colors.magenta + 'Servidor corriendo en el puerto:' + customText.end,
+        customText.bold + customText.colors.blanco + `${PORT}` + customText.end,
+        customText.bold + customText.colors.cyan + '| ' + customText.end +
+        '🚀'
+    );
+    
 });

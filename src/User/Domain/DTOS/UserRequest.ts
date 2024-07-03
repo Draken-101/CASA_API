@@ -2,7 +2,7 @@ export interface UserCreateRequest{
     name:string;
     email:string;
     password:string;
-    rol:string;
+    role:string;
 }
 
 export interface UserLoginRequest{

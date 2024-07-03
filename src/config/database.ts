@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import signale from 'signale';
-import * as dotenv from 'dotenv'
-import UserModel from './Models/UserModel';
+import * as dotenv from 'dotenv';
+import { custom, customText } from './Services/customSignale';
+import InicializateDB from './Services/InicializateDB';
 
 dotenv.config();
 
@@ -11,10 +12,19 @@ const ConectionToMongoDB = async () => {
     try {
         const conn = await mongoose.connect(DB_URI, {});
 
-        signale.success(`🌐 \x1b[1m\x1b[36m|\x1b[0m\x1b[35m Conectado a MongoDB: \x1b[1m\x1b[37m${conn.connection.host}\x1b[0m \x1b[1m\x1b[36m|\x1b[0m ✅`)
+        InicializateDB();
+        
+        custom.Success(
+            '🌐' +
+            customText.bold + customText.colors.cyan + ' | ' + customText.end +
+            customText.colors.magenta + 'Conectado a MongoDB: ' + customText.end +
+            customText.bold + customText.colors.blanco + conn.connection.host + customText.end +
+            customText.bold + customText.colors.cyan + ' | ' + customText.end +
+            '🌐'
+        )
     } catch (error) {
         signale.error(error);
     }
 }
 
-export default ConectionToMongoDB;
+export default ConectionToMongoDB; 
