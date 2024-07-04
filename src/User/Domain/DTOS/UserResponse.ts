@@ -5,4 +5,5 @@ export interface UserResponse {
 
 export interface UserLoginResponse extends UserResponse {
     token: string;
+    role:string;
 }

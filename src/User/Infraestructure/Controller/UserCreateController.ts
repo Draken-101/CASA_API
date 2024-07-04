@@ -24,7 +24,7 @@ export default class UserCreateController {
             customText.bold + customText.colors.cyan + '}' + customText.end
         );
 
-        const newUser = await this.userCreate.execute(user);
+        const newUser = await this.userCreate.execute(user); 
 
         res.status(200).json(newUser);
         return newUser;

@@ -11,7 +11,7 @@ const PASSWORD_ADMIN = process.env.PASSWORD_ADMIN || "passwordAdmin123"
 
 const Roles = ['admin', 'visita', 'padre', 'hijo', 'ladron'];
 const Devices = [
-    'Foco-Cuarto-1',
+    'Foco-Cuarto-1', 
     'Foco-Cuarto-2',
     'Foco-Pasillo-1',
     'Foco-Porton-1',
@@ -19,7 +19,9 @@ const Devices = [
     'Puerta-Cuarto-Entrada',
     'Puerta-Cuarto-Baño',
     'Porton',
-    'Television',]
+    'Television',
+    'Clima'
+]
 
 export default async function InicializateDB() {
     try {
@@ -56,10 +58,10 @@ export default async function InicializateDB() {
 
         if (devices.length === 0) {
             Devices.map(async (device) => {
-                await createDeviceUseCase.execute({ name: device });
+                await createDeviceUseCase.execute({name: device});
             })
         }
-        
+
         await userCreateUseCase.execute({
             name: "Admin",
             email: "admin@example.com",

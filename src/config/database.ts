@@ -27,4 +27,4 @@ const ConectionToMongoDB = async () => {
     }
 }
 
-export default ConectionToMongoDB; 
+export default ConectionToMongoDB;  

@@ -5,7 +5,7 @@ export default class TriggerDeviceController{
     constructor(private readonly deviceRepository: TriggerDeviceUseCase){}
 
     async run(req:Request, res:Response){
-        const { name } = req.body;
+        const { name, nameUser, role } = req.body;
         const result = await this.deviceRepository.execute(name);
         if (!result.success) {
             res.status(403).send(result);

@@ -11,7 +11,7 @@ export default class AuthServices {
         try {
             return jwt.verify(token, this.secret) as jwt.JwtPayload;
         } catch (error) {
-            return undefined;
+            return false;
         }
     }
 

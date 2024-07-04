@@ -15,6 +15,7 @@ app.use(cors({
     "origin":"*"
 }));
 
+
 app.use('/api/v1/users', UserRoutes);
 
 app.use('/api/v1/devices', DeviceRouter);
@@ -24,6 +25,7 @@ ConectionToMongoDB();
 app.listen(PORT, () => {
     console.clear();
     // [36m]-Cyan | [35m]-Magenta | [37m]-Blanco | [\xqb]-AgreagaColor | [0m]-noBold | [1m]-Bold
+    
     
     custom.Success(
         '🚀' + 

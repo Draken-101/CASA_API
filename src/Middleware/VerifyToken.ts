@@ -15,13 +15,14 @@ export default class VerifyToken {
                 return res.status(403).send('Falta token');
             }
 
-            const result = this.auth.ValidateToken(token.toString());
+            const result = this.auth.ValidateToken(token.toString()) ;
 
-            if (!result || typeof result !== 'object' || !result.id) {
-                return res.status(403).send('Token invalido');
+            if (!result) {
+                return res.status(403).send('No hay token');
             }
 
             const user = await UserModel.findOne({ name: nameUser }).select('password role').exec();
+
 
             if (!user) {
                 return res.status(404).send('Usuario no encontrado');

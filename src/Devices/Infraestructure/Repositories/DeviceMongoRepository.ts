@@ -4,8 +4,24 @@ import { custom, customText } from "../../../config/Services/customSignale";
 import DeviceModel from '../../../config/Models/DeviceModel';
 import { DeviceCreateResponse, DeviceResponse, DeviceTriggerResponse } from "../../Domain/DTOS/DeviceResponse";
 import { DeviceRequest } from "../../Domain/DTOS/DeviceRequest";
+import { Request, Response } from "express";
 
 export default class DeviceMongoRepository implements DeviceRepository {
+    private Clients: Response[] = [];
+
+    async GetRealTimeStatusDevices(req: Request, res: Response): Promise<void> {
+        try {
+            this.Clients.push(res);
+
+            req.on('close', () => {
+                this.Clients = this.Clients.filter(client => client !== res);
+            })
+            return;
+        } catch (error) {
+            custom.Error(error);
+            return;
+        }
+    }
 
     async TriggerDevice(name: string): Promise<DeviceTriggerResponse> {
         try {
@@ -20,12 +36,14 @@ export default class DeviceMongoRepository implements DeviceRepository {
                     customText.bold + customText.colors.cyan + ' | ' + customText.end +
                     "🌐"
                 );
-                return {triggerDevice: {}, success: false, message: '¡' + name + ', no esta en la base de datos!', };
+                return { triggerDevice: {}, success: false, message: '¡' + name + ', no esta en la base de datos!', };
             }
 
             await deviceFound.TriggerStatus();
 
             await deviceFound.save();
+
+            this.sendTriggerToClients(deviceFound);
 
             custom.Success(
                 "✅" +
@@ -37,11 +55,18 @@ export default class DeviceMongoRepository implements DeviceRepository {
                 "✅"
             );
 
-            return {triggerDevice: deviceFound, success: true, message: '¡' + name + ', se ah usado!', };
+            return { triggerDevice: deviceFound, success: true, message: '¡' + name + ', se ah usado!', };
         } catch (error) {
             custom.Error(error);
-            return {triggerDevice: {}, success: false, message: 'error en el servidor!', };
+            return { triggerDevice: {}, success: false, message: 'error en el servidor!', };
         }
+    }
+
+    private async sendTriggerToClients(device: DeviceResponse){
+        this.Clients.map(client => {
+            client.write(`event:Trigger\n`);
+            client.write(`data:${JSON.stringify(device)}\n\n`); 
+        });
     }
 
     async CreateDevice(device: DeviceRequest): Promise<DeviceCreateResponse> {
@@ -62,7 +87,7 @@ export default class DeviceMongoRepository implements DeviceRepository {
             const newDevice = new DeviceModel(device);
             await newDevice.save();
             custom.Success(
-                "✅" +
+                "✅" + 
                 customText.bold + customText.colors.cyan + ' | ' + customText.end +
                 customText.colors.magenta + '¡' + customText.end +
                 customText.bold + customText.colors.blanco + device.name + customText.end +

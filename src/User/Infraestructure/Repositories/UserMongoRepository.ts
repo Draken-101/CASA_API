@@ -67,7 +67,7 @@ export default class UserMongoRepository implements UserRepository {
                     customText.bold + customText.colors.cyan + ' | ' + customText.end +
                     "🛑"
                 );
-                return { message: `${user.name} no existe en la base de datos`, state: false, token: '' };
+                return { message: `${user.name} no existe en la base de datos`, state: false, token: '', role: ""  };
             }
 
             const validatePassword = await userFound.ComparedPassword(user.password);
@@ -82,7 +82,7 @@ export default class UserMongoRepository implements UserRepository {
                     customText.bold + customText.colors.cyan + ' | ' + customText.end +
                     "🛑"
                 );
-                return { message: 'Contraseña incorrecta', state: false, token: '' };
+                return { message: 'Contraseña incorrecta', state: false, token: '', role: ""  };
             }
 
             custom.Login(
@@ -95,9 +95,9 @@ export default class UserMongoRepository implements UserRepository {
                 "✅"
             );
 
-            return { message: 'Sesion iniciada con exito', state: true, token: '' };
+            return { message: 'Sesion iniciada con exito', state: true, token: '', role: userFound.role };
         } catch (error) {
-            return { message: 'Ocurrio un error en el servidor', state: false, token: '' };
+            return { message: 'Ocurrio un error en el servidor', state: false, token: '', role: ""  };
         }
     }
 
