@@ -4,9 +4,9 @@ import UserMongoRepository from "./Repositories/UserMongoRepository";
 import UserCreateController from "./Controller/UserCreateController";
 import LoginUseCase from '../Application/UseCase/LoginUseCase';
 import LoginController from './Controller/LoginController'
-import AuthServices from "../Application/Services/Auth";
 import VerifyToken from '../../Middleware/VerifyToken'
 import * as dotenv from 'dotenv';
+import AuthServices from "../../Middleware/Services/Auth";
 
 dotenv.config();
 const SECRET = process.env.SECRET || "Secret";

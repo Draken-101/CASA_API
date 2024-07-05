@@ -1,3 +1,8 @@
 export interface DeviceRequest{
-    name:string;
+    nameDevice:string;
+}
+
+export interface DeviceTriggerRequest extends DeviceRequest{
+    roleUser:string;
+    nameUser:string;
 }

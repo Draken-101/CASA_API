@@ -18,4 +18,6 @@ export default class AuthServices {
     GenerateToken(password: string) {
         return jwt.sign({ id: password }, this.secret, { expiresIn: 86400 })
     }
+
+    
 }

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { custom } from "../config/Services/customSignale";
-import AuthServices from "../User/Application/Services/Auth";
+import AuthServices from "./Services/Auth";
 import UserModel from '../config/Models/UserModel'
 
 export default class VerifyToken {

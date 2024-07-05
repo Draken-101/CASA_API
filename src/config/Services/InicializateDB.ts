@@ -58,7 +58,7 @@ export default async function InicializateDB() {
 
         if (devices.length === 0) {
             Devices.map(async (device) => {
-                await createDeviceUseCase.execute({name: device});
+                await createDeviceUseCase.execute({nameDevice: device});
             })
         }
 

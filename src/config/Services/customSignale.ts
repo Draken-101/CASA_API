@@ -37,6 +37,18 @@ const options = {
             label: 'Login',
             logLevel: 'info'
         },
+        NewMessage: {
+            badge: '🌟',
+            color: 'yellow',
+            label: 'NewMessage',
+            logLevel: 'info'
+        },
+        Intruso: {
+            badge: '🕵️‍♂️',
+            color: 'red',
+            label: 'Intruso',
+            logLevel: 'info'
+        }
     }
 }
 
@@ -47,7 +59,7 @@ export const customText = {
         magenta: '\x1b[35m',
         cyan: '\x1b[36m',
         blanco: '\x1b[37m'
-        
+
     },
     end: "\x1b[0m"
 }

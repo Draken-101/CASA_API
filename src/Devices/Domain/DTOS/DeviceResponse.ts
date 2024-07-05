@@ -1,7 +1,6 @@
-import { ObjectId } from "mongoose";
 
 export interface DeviceResponse {
-    name:string;
+    nameDevice:string;
     status:boolean;
 }
 

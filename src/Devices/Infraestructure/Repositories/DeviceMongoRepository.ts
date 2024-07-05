@@ -1,9 +1,9 @@
 
 import DeviceRepository from "../../Domain/Repositories/DeviceRepository";
-import { custom, customText } from "../../../config/Services/customSignale";
+import { custom } from "../../../config/Services/customSignale";
 import DeviceModel from '../../../config/Models/DeviceModel';
 import { DeviceCreateResponse, DeviceResponse, DeviceTriggerResponse } from "../../Domain/DTOS/DeviceResponse";
-import { DeviceRequest } from "../../Domain/DTOS/DeviceRequest";
+import { DeviceRequest, DeviceTriggerRequest } from "../../Domain/DTOS/DeviceRequest";
 import { Request, Response } from "express";
 
 export default class DeviceMongoRepository implements DeviceRepository {
@@ -23,20 +23,11 @@ export default class DeviceMongoRepository implements DeviceRepository {
         }
     }
 
-    async TriggerDevice(name: string): Promise<DeviceTriggerResponse> {
+    async TriggerDevice(device: DeviceTriggerRequest): Promise<DeviceTriggerResponse> {
         try {
-            const deviceFound = await this.findByName(name, 'name status');
+            const deviceFound = await this.findByName(device.nameDevice, 'nameDevice status');
             if (!deviceFound) {
-                custom.Error(
-                    "🌐" +
-                    customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                    customText.colors.magenta + '¡' + customText.end +
-                    customText.bold + customText.colors.blanco + name + customText.end +
-                    customText.colors.magenta + ', no esta en la base de datos!' + customText.end +
-                    customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                    "🌐"
-                );
-                return { triggerDevice: {}, success: false, message: '¡' + name + ', no esta en la base de datos!', };
+                return { triggerDevice: {}, success: false, message: '¡No esta en la base de datos!', };
             }
 
             await deviceFound.TriggerStatus();
@@ -45,17 +36,7 @@ export default class DeviceMongoRepository implements DeviceRepository {
 
             this.sendTriggerToClients(deviceFound);
 
-            custom.Success(
-                "✅" +
-                customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                customText.colors.magenta + '¡' + customText.end +
-                customText.bold + customText.colors.blanco + name + customText.end +
-                customText.colors.magenta + ', se ah usado!' + customText.end +
-                customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                "✅"
-            );
-
-            return { triggerDevice: deviceFound, success: true, message: '¡' + name + ', se ah usado!', };
+            return { triggerDevice: deviceFound, success: true, message: '¡Se ah usado!', };
         } catch (error) {
             custom.Error(error);
             return { triggerDevice: {}, success: false, message: 'error en el servidor!', };
@@ -71,39 +52,21 @@ export default class DeviceMongoRepository implements DeviceRepository {
 
     async CreateDevice(device: DeviceRequest): Promise<DeviceCreateResponse> {
         try {
-            const deviceFound = await this.findByName(device.name, '');
+            const deviceFound = await this.findByName(device.nameDevice, '');
             if (deviceFound) {
-                custom.Error(
-                    "🌐" +
-                    customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                    customText.colors.magenta + '¡' + customText.end +
-                    customText.bold + customText.colors.blanco + device.name + customText.end +
-                    customText.colors.magenta + ' ya esta agregado!' + customText.end +
-                    customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                    "🌐"
-                );
-                return { newDevice: deviceFound, success: false, message: '¡' + device.name + ' Ya esta agregado!', };
+                return { newDevice: deviceFound, success: false, message: '¡Ya esta agregado!', };
             }
             const newDevice = new DeviceModel(device);
             await newDevice.save();
-            custom.Success(
-                "✅" + 
-                customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                customText.colors.magenta + '¡' + customText.end +
-                customText.bold + customText.colors.blanco + device.name + customText.end +
-                customText.colors.magenta + ' agregado exitosamente!' + customText.end +
-                customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                "✅"
-            );
-            return { newDevice: newDevice, success: true, message: '¡' + device.name + ' agregado exitosamente!', };
+            return { newDevice: newDevice, success: true, message: '¡Agregado exitosamente!', };
         } catch (error) {
             custom.Error(error);
-            return { newDevice: {}, success: true, message: 'error en el servidor', };
+            return { newDevice: {}, success: false, message: 'error en el servidor', };
         }
     }
 
-    private async findByName(device: string, select: string) {
-        const deviceFound = await DeviceModel.findOne({ name: device }).select(select).exec();
+    private async findByName(nameDevice: string, select: string) {
+        const deviceFound = await DeviceModel.findOne({ nameDevice: nameDevice }).select(select).exec();
         if (deviceFound) {
             return deviceFound;
         }
@@ -113,18 +76,10 @@ export default class DeviceMongoRepository implements DeviceRepository {
     async GetDevices(): Promise<DeviceResponse[] | object> {
         try {
             const Devices = await DeviceModel.find().exec();
-
-            custom.Success(
-                "✅" +
-                customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                customText.colors.magenta + '¡Han pedido los dispositivos!' + customText.end +
-                customText.bold + customText.colors.cyan + ' | ' + customText.end +
-                "✅"
-            );
             return Devices;
         } catch (error) {
             custom.Error(error);
             return { message: '', status: false, success: false };
         }
     }
-}
+} 

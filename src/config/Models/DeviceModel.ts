@@ -1,14 +1,14 @@
 import { Document, Schema, model } from "mongoose";
 
 interface DeviceDocument extends Document {
-    name: string;
+    nameDevice: string;
     status: boolean;
     position?: number[];
     TriggerStatus: () => Promise<boolean>;
 }
 
 const DeviceSchema = new Schema<DeviceDocument>({
-    name: { type: String, required: true },
+    nameDevice: { type: String, required: true },
     status: { type: Boolean, required: true, default: false },
     position: []
 });

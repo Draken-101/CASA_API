@@ -1,6 +1,6 @@
+import AuthServices from "../../../Middleware/Services/Auth";
 import { UserLoginRequest } from "../../Domain/DTOS/UserRequest";
 import UserRepository from "../../Domain/Repositories/UserRepository";
-import AuthServices from '../Services/Auth'
 
 export default class LoginUseCase {
     constructor(
