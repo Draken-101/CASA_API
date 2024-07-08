@@ -7,6 +7,14 @@ import TriggerDeviceUseCase from '../Application/UseCase/TriggerDeviceUseCase';
 import TriggerDeviceController from './Controller/TriggerDeviceController';
 import GetRealTimeStatusDevicesUseCase from '../Application/UseCase/GetRealTimeStatusDevicesUseCase'
 import GetRealTimeStatusDevicesController from './Controller/GetRealTimeStatusDevicesController'
+import SocketConnection from './Services/SocketConnnection';
+import * as dotenv from 'dotenv';
+
+dotenv.config()
+
+const WS_URI = process.env.WS_URI || 'wss://localhost:8000';
+
+const webSocketService = new SocketConnection(WS_URI);
 
 const deviceMongoRepository = new DeviceMongoRepository();
 
@@ -20,10 +28,11 @@ const createDeviceController = new CreateDeviceController(createDeviceUseCase);
 const getDevicesController = new GetDevicesController(getDevicesUseCase);
 const getRealTimeStatusDevicesController = new GetRealTimeStatusDevicesController(getRealTimeStatusDevicesUseCase);
 
-export {
+export { 
     createDeviceController,
     createDeviceUseCase,
     getDevicesController,
     triggerDeviceController,
-    getRealTimeStatusDevicesController
-}
+    getRealTimeStatusDevicesController,
+    webSocketService
+}  

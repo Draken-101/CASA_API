@@ -48,6 +48,12 @@ const options = {
             color: 'red',
             label: 'Intruso',
             logLevel: 'info'
+        },
+        Close: {
+            badge: '🔌',
+            color: 'grey',
+            label: 'User Disconnect',
+            logLevel: 'info'
         }
     }
 }
