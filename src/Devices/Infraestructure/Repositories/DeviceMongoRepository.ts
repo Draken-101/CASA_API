@@ -40,7 +40,7 @@ export default class DeviceMongoRepository implements DeviceRepository {
         } catch (error) {
             custom.Error(error);
             return { triggerDevice: {}, success: false, message: 'error en el servidor!', };
-        }
+        } 
     }
 
     private async sendTriggerToClients(device: DeviceResponse){

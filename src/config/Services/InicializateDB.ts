@@ -9,7 +9,7 @@ dotenv.config();
 
 const PASSWORD_ADMIN = process.env.PASSWORD_ADMIN || "passwordAdmin123"
 
-const Roles = ['admin', 'visita', 'padre', 'hijo', 'ladron'];
+const Roles = ['admin', 'visita', 'padre', 'hijo'];
 const Devices = [
     'Foco-Cuarto-1', 
     'Foco-Cuarto-2',

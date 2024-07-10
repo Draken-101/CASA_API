@@ -13,7 +13,7 @@ export default class GetDevicesController{
             customText.bold + customText.colors.cyan + ' | ' + customText.end +
             customText.colors.magenta + '¡Han pedido los dispositivos!' + customText.end +
             customText.bold + customText.colors.cyan + ' | ' + customText.end +
-            "✅"
+            "✅" 
         );
         return;
     }

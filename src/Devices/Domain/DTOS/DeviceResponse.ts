@@ -14,4 +14,4 @@ export interface DeviceCreateResponse{
     newDevice:object;
     success:boolean;
     message:string;
-}
+} 

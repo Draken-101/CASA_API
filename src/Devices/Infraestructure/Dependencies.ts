@@ -8,9 +8,14 @@ import TriggerDeviceController from './Controller/TriggerDeviceController';
 import GetRealTimeStatusDevicesUseCase from '../Application/UseCase/GetRealTimeStatusDevicesUseCase'
 import GetRealTimeStatusDevicesController from './Controller/GetRealTimeStatusDevicesController'
 import SocketConnection from './Services/SocketConnnection';
+import EmailConnection from './Services/EmailConnection';
+import ValidateAction from './Middleware/ValidateAction'
 import * as dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
+
+const emailConnection = new EmailConnection();
+const validateAction = new ValidateAction(emailConnection);
 
 const WS_URI = process.env.WS_URI || 'wss://localhost:8000';
 
@@ -34,5 +39,6 @@ export {
     getDevicesController,
     triggerDeviceController,
     getRealTimeStatusDevicesController,
-    webSocketService
+    webSocketService,
+    validateAction
 }  
