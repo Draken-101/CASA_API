@@ -1,6 +1,6 @@
 
 import { DeviceRequest } from "../../Domain/DTOS/DeviceRequest";
-import DeviceRepository from "../../Domain/Repositories/DeviceRepository";
+import DeviceRepository from "../../Domain/Ports/DeviceRepository";
 
 export default class CreateDeviceUseCase{
     constructor(private readonly deviceRepository: DeviceRepository) {}

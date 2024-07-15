@@ -1,4 +1,4 @@
-import Socket from "../Ports/Socket";
+import Socket from "./Socket";
 
 export default interface SocketRepository {
     sendAction(data: Socket): void;

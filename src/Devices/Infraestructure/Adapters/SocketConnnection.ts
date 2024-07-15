@@ -1,6 +1,6 @@
 import { WebSocket } from "ws";
 import Socket from "../../Domain/Ports/Socket";
-import SocketRepository from "../../Domain/Repositories/SocketRepository";
+import SocketRepository from "../../Domain/Ports/SocketRepository";
 import { custom, customText } from "../../../config/Services/customSignale";
 
 export default class SocketConnection implements SocketRepository {

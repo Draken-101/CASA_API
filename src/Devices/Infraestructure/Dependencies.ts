@@ -1,5 +1,5 @@
 import CreateDeviceUseCase from "../Application/UseCase/CreateDeviceUseCase";
-import DeviceMongoRepository from "./Repositories/DeviceMongoRepository";
+import DeviceMongoRepository from "./Adapters/DeviceMongoRepository";
 import CreateDeviceController from "./Controller/CreateDeviceController";
 import GetDevicesUseCase from '../Application/UseCase/GetDevicesUseCase';
 import GetDevicesController from './Controller/GetDevicesController';
@@ -7,8 +7,8 @@ import TriggerDeviceUseCase from '../Application/UseCase/TriggerDeviceUseCase';
 import TriggerDeviceController from './Controller/TriggerDeviceController';
 import GetRealTimeStatusDevicesUseCase from '../Application/UseCase/GetRealTimeStatusDevicesUseCase'
 import GetRealTimeStatusDevicesController from './Controller/GetRealTimeStatusDevicesController'
-import SocketConnection from './Services/SocketConnnection';
-import EmailConnection from './Services/EmailConnection';
+import SocketConnection from './Adapters/SocketConnnection';
+import EmailConnection from './Adapters/EmailConnection';
 import ValidateAction from './Middleware/ValidateAction'
 import * as dotenv from 'dotenv';
 

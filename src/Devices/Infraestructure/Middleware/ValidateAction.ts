@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import { custom, customText } from "../../../config/Services/customSignale";
 import RoleModel from "../../../config/Models/RoleModel";
-import EmailRepository from "../../Domain/Repositories/EmailJs";
+import SenderEmail from "../../Domain/Ports/SenderEmail";
 
 export default class ValidateAction{
-    constructor( readonly client: EmailRepository){}
+    constructor( readonly client: SenderEmail){}
 
     async run(req:Request, _res:Response, next: NextFunction){
         try {

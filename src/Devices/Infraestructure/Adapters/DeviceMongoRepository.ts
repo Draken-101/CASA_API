@@ -1,5 +1,5 @@
 
-import DeviceRepository from "../../Domain/Repositories/DeviceRepository";
+import DeviceRepository from "../../Domain/Ports/DeviceRepository";
 import { custom } from "../../../config/Services/customSignale";
 import DeviceModel from '../../../config/Models/DeviceModel';
 import { DeviceCreateResponse, DeviceResponse, DeviceTriggerResponse } from "../../Domain/DTOS/DeviceResponse";

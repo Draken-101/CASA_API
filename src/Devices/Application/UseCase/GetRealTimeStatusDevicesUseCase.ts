@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import DeviceRepository from "../../Domain/Repositories/DeviceRepository";
+import DeviceRepository from "../../Domain/Ports/DeviceRepository";
 
 export default class GetRealTimeStatusDevicesUseCase{
     constructor(private readonly deviceRepository : DeviceRepository){}

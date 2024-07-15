@@ -47,7 +47,7 @@ app.listen(PORT, () => {
     
 }); 
 
-webSocketService.onMessage((message) => {
+webSocketService.onMessage((message: any) => {
     custom.Info(
         customText.bold + customText.colors.cyan + ' | ' + customText.end +
         customText.colors.magenta + 'Mensage recibido:' + customText.end,

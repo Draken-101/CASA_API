@@ -1,4 +1,5 @@
-import DeviceRepository from "../../Domain/Repositories/DeviceRepository";
+
+import DeviceRepository from "../../Domain/Ports/DeviceRepository";
 
 export default class GetDevicesUseCase {
     constructor(private readonly deviceRepository: DeviceRepository) { }
