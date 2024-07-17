@@ -47,14 +47,7 @@ app.listen(PORT, () => {
     
 }); 
 
-webSocketService.onMessage((message: any) => {
-    custom.Info(
-        customText.bold + customText.colors.cyan + ' | ' + customText.end +
-        customText.colors.magenta + 'Mensage recibido:' + customText.end,
-        customText.bold + customText.colors.blanco + `${message}` + customText.end,
-        customText.bold + customText.colors.cyan + ' | ' + customText.end 
-    )
-});
+webSocketService.onMessage();
 
 webSocketService.sendAction({nameUser: 'API_CASA', role: 'API', type: 'CONNECTION', message: 'CONNECTION', status:true});
 

@@ -10,6 +10,12 @@ export interface DeviceTriggerResponse{
     success:boolean;
 }
 
+export interface DeviceTriggerSocket extends DeviceTriggerResponse{
+    event:string;
+    user:string;
+    role:string;
+}
+
 export interface DeviceCreateResponse{
     newDevice:object;
     success:boolean;

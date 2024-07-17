@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import TriggerDeviceUseCase from "../../Application/UseCase/TriggerDeviceUseCase";
 import { custom, customText } from "../../../config/Services/customSignale";
+import SocketRepository from "../../Domain/Ports/SocketRepository";
 
 export default class TriggerDeviceController {
-    constructor(private readonly deviceRepository: TriggerDeviceUseCase) { }
+    constructor(private readonly deviceRepository: TriggerDeviceUseCase, private readonly socket: SocketRepository) { }
 
     async run(req: Request, res: Response) {
         const { nameDevice, nameUser, roleUser } = req.body;
@@ -27,7 +28,10 @@ export default class TriggerDeviceController {
             customText.bold + customText.colors.cyan + ' | ' + customText.end +
             "✅"
         );
+
+        this.socket.sendTrigger({ ...result, event: 'Trigger', user: nameUser, role: roleUser })
         res.status(200).json(result);
         return;
     }
+
 }
