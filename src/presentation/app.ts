@@ -29,26 +29,20 @@ app.use('/api/v1/devices', DeviceRouter);
 
 ConectionToMongoDB();
 
-
-
 app.listen(PORT, () => {
     // [36m]-Cyan | [35m]-Magenta | [37m]-Blanco | [\xqb]-AgreagaColor | [0m]-noBold | [1m]-Bold
     
-    
-    console.log(WS_URI);
     custom.Success(
         '🚀' + 
         customText.bold + customText.colors.cyan + ' | ' + customText.end +
         customText.colors.magenta + 'Servidor corriendo en el puerto:' + customText.end,
         customText.bold + customText.colors.blanco + `${PORT}` + customText.end,
         customText.bold + customText.colors.cyan + '| ' + customText.end +
-        '🚀'
-    );
+        '🚀' 
+    ); 
     
 }); 
 
-webSocketService.onMessage();
-
-webSocketService.sendAction({nameUser: 'API_CASA', role: 'API', type: 'CONNECTION', message: 'CONNECTION', status:true});
+webSocketService.conection({nameUser: 'API_CASA', role: 'API', type: 'CONNECTION', message: 'CONNECTION', status:true});
 
 console.clear();

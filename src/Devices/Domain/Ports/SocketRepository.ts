@@ -1,8 +1,6 @@
-import { DeviceTriggerResponse, DeviceTriggerSocket } from "../DTOS/DeviceResponse";
-import Socket from "./Socket";
+import { DeviceTriggerSocket } from "../DTOS/DeviceResponse";
 
 export default interface SocketRepository {
-    sendAction(data: Socket): void;
     sendTrigger(data: DeviceTriggerSocket): void;
-    onMessage(callback: (message: string) => void): void;
+    conection(data: any):void;
 }

@@ -23,9 +23,9 @@ export default class TriggerDeviceController {
         custom.Success(
             "✅" +
             customText.bold + customText.colors.cyan + ' | ' + customText.end +
-            customText.bold + customText.colors.blanco + nameDevice + customText.end +
+            customText.bold + customText.colors.blanco + nameDevice + customText.end +   
             customText.colors.magenta + ', ' + result?.message + customText.end +
-            customText.bold + customText.colors.cyan + ' | ' + customText.end +
+            customText.bold + customText.colors.cyan + ' | ' + customText.end + 
             "✅"
         );
 
