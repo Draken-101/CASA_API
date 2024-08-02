@@ -10,20 +10,20 @@ const DB_URI = process.env.DB_URI || 'mongodb://localhost:27017/Casa';
 
 const ConectionToMongoDB = async () => {
     try {
-        const conn = await mongoose.connect(DB_URI, {});
-
-        InicializateDB();
-        
-        custom.Success(
+        const conn = await mongoose.connect(DB_URI, {dbName:'Casa'});
+         
+        InicializateDB(); 
+   
+        custom.Success( 
             '🌐' +
             customText.bold + customText.colors.cyan + ' | ' + customText.end +
             customText.colors.magenta + 'Conectado a MongoDB: ' + customText.end +
             customText.bold + customText.colors.blanco + conn.connection.host + customText.end +
             customText.bold + customText.colors.cyan + ' | ' + customText.end +
-            '🌐'
+            '🌐' 
         )
     } catch (error) {
-        signale.error(error);
+        signale.error(error); 
     }
 }
 

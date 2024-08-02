@@ -21,7 +21,7 @@ const loginUseCase = new LoginUseCase(userMongoRepository, Auth);
 const userCreateController = new UserCreateController(userCreateUseCase);
 const loginController = new LoginController(loginUseCase);
 
-export {
+export { 
     userCreateController,
     userCreateUseCase,
     loginController,

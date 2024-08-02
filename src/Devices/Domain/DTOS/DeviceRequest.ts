@@ -3,6 +3,7 @@ export interface DeviceRequest{
 }
 
 export interface DeviceTriggerRequest extends DeviceRequest{
+    status?:boolean;
     roleUser:string;
     nameUser:string;
 }

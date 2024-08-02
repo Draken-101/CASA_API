@@ -4,20 +4,26 @@ import { custom } from "../../../config/Services/customSignale";
 import DeviceModel from '../../../config/Models/DeviceModel';
 import { DeviceCreateResponse, DeviceResponse, DeviceTriggerResponse } from "../../Domain/DTOS/DeviceResponse";
 import { DeviceRequest, DeviceTriggerRequest } from "../../Domain/DTOS/DeviceRequest";
+import ActionModel from "../../../config/Models/ActionModel";
 
 export default class DeviceMongoRepository implements DeviceRepository {
 
     async TriggerDevice(device: DeviceTriggerRequest): Promise<DeviceTriggerResponse> {
         try {
-            const deviceFound = await this.findByName(device.nameDevice, 'nameDevice status');
+            let deviceFound = await this.findByName(device.nameDevice, 'nameDevice status');
             if (!deviceFound) {
                 return { triggerDevice: {}, success: false, message: '¡No esta en la base de datos!', };
             }
- 
-            await deviceFound.TriggerStatus();
+
+            if (device.status == undefined || device.status == null) {
+                await deviceFound.TriggerStatus();
+            } else {
+                deviceFound.status = device.status;
+            }
 
             await deviceFound.save();
 
+            await new ActionModel({ device: device.nameDevice, user: device.nameUser, role: device.roleUser }).save();
             return { triggerDevice: deviceFound, success: true, message: '¡Se ah usado!', };
         } catch (error) {
             custom.Error(error);

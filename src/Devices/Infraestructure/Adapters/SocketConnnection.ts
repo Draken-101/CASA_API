@@ -56,6 +56,14 @@ export default class SocketConnection implements SocketRepository {
         this.send(data);
     }
 
+    sendAction(action: any): void {
+        this.send(action);
+    }
+
+    sendTemperature(data: any): void {
+        this.send(data);
+    }
+
     private send(data: any){
         if (this.isReady && this.socket.readyState === WebSocket.OPEN) {
             this.socket.send(JSON.stringify(data));
